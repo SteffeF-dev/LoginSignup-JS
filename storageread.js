@@ -1,13 +1,13 @@
 import fs from "fs"
 
 
-//Read storage.txt with parse and put it through LoopDatabase to check for email and then return password
+//Read storage.txt with parse and put it through LoopDatabase to check for email and then return password, also used to verify that an email hasn't been already registered when signing up.
 const DatabaseRead = (input) => {
     const accdata = fs.readFileSync("Storage.txt", "utf8");
     const reader = JSON.parse(accdata);
     let accPass;
 
-    LoopDatabase(input, reader) ? accPass = LoopDatabase(input, reader) : console.log(`${input} hasn't been registered`);
+    LoopDatabase(input, reader) ? accPass = LoopDatabase(input, reader) : console.log(``);
     return accPass;
 }
 

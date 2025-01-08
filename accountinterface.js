@@ -33,7 +33,7 @@ const Login = (string) => {
         PassMatch(matchPass);
     }
     else {
-        console.log("Invalid email");
+        console.log("Invalid input");
     }
 
 }
@@ -41,18 +41,26 @@ const Login = (string) => {
 const Signup = (input) => {
     input = prompt("Enter email: ");
     if (isValidEmail(input)) {
-        const email = isValidEmail(input);
-        console.log(`${email} is a valid email`);
-        input = prompt("Enter password: ");
-        PasswordChecker(input) ? AddAcc(email, input) : console.log(`${input} is too weak`);
+        if (DatabaseRead(input) === undefined) {
+            const email = isValidEmail(input);
+            console.log(`${email} is a valid email`);
+            input = prompt("Enter password: ");
+            PasswordChecker(input) ? AddAcc(email, input) : console.log(`${input} is too weak`);
+        }
+        else {
+            console.log(`${input} has already been registered`);
+        }
+    }
+    else {
+        console.log("Incorrect format");
     }
 }
 
 const AddAcc = (email, pass) => {
-    console.log("Sign up added!");
     const objHolder = AccTemplate(email, pass);
     accountList.push(objHolder);
     console.log(accountList);
+    console.log("Sign up added!");
     DatabaseData(accountList);
 }
 
