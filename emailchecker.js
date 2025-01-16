@@ -1,40 +1,13 @@
-
 const isValidEmail = (email) => {
-    let checker = email.includes(" ");
+  const str = email.split("@");
+  if (email.includes(" ")) {
+    return false;
+  }
 
-    if (checker) {
-        return false;
-    }
+  if (str.length === 2 && str[1].includes(".") && str[1].at(0) !== ".") {
+    return true;
+  }
+  return false;
+};
 
-    if (!checker) {
-        var kerroin = 0;
-        for (var i = 0; i < email.length; i++) {
-            if (email[i] === "@") {
-                kerroin++;
-            }
-
-        }
-        if (kerroin > 1) {
-            return false;
-        }
-
-        if (kerroin === 1) {
-            const atsign = "@";
-            const validPartIndex = email.lastIndexOf(atsign);
-            const dotblocker = email[validPartIndex + 1] === ".";
-
-            if (dotblocker) {
-                return false;
-            }
-            if (!dotblocker) {
-                return email;
-            }
-
-
-        }
-
-
-    }
-}
-
-export default isValidEmail
+export default isValidEmail;
